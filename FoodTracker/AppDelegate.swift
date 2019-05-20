@@ -6,9 +6,22 @@
 //  Copyright © 2019 Fan Zhang. All rights reserved.
 //
 
+// Initialize the app & respond to app-level events
+
 import UIKit
 
+// Create the **entry point** to your app & a **run loop** that delivers input events to your app
+// == UIApplicationMain(AppDelegate)
+// - Create an application object: responsible for managing the life cycle of the app
+// - Create an instance of `AppDelegate` class, assign it to the application object
+// - The system launche your app
 @UIApplicationMain
+
+// Define `AppDelegate` class
+// - Create the window
+// - Provide a place to respond to state transitions within the app
+// - Adopt the `UIApplicationDelegate` protocal: define methods to set up the app, espond to the app's state changes,
+// & handle app-level events
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
