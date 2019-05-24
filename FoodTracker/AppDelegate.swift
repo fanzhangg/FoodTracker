@@ -23,10 +23,12 @@ import UIKit
 // - Adopt the `UIApplicationDelegate` protocal: define methods to set up the app, espond to the app's state changes,
 // & handle app-level events
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    // Property `window`
+    // - Store a reference to the app's window
+    // - Represent the root of the app's view hierachy
     var window: UIWindow?
 
-
+    // Let the application object communicate with the app delegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
