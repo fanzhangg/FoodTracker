@@ -9,7 +9,8 @@
 import UIKit
 
 // Define a subclass of UIViewController
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+    // `UITextFieldDelegate` protocal: the `ViewController` class can act as a valid text field delegate
     
     //MARK: Properties
     //Outlets" refer to your interface elements in code
@@ -27,6 +28,25 @@ class ViewController: UIViewController {
         // Assigend valid values to all controller's outlets, & safely access the contents after it is called
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Handle the text field's user input through delegate callbacks
+        // - `self` refers to the `ViewController` class
+        nameTextField.delegate = self
+
+    }
+    
+    //MARK: UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        // Resign the text field's first-responder status
+        textField.resignFirstResponder()
+        // Indicate the system should process the press of the `Return` key
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Read the information entered into the text field & do sth.
+        mealNameLabel.text = textField.text
     }
     
     //MARK: Actions

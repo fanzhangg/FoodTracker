@@ -37,3 +37,7 @@
 - Action: code linked to an event that can occur in your app
 - Target-action pattern: a design pattern where one object sends a message to another object when a specific event occurs
 
+- Delegate: an object that acts on behalf of / in coordination with another object
+  - keeps a reference to the other object
+  - send a message to the delegate
+- First responder: an object that is first on the line for receiving many kinds of app events
