@@ -41,3 +41,14 @@
   - keeps a reference to the other object
   - send a message to the delegate
 - First responder: an object that is first on the line for receiving many kinds of app events
+- Model-View-Controller: view controllers serve as the communication pipeline between your views and your data model
+  - Model: keep track of the app's data
+  - View: display the user interface & make up the content of an app
+  - Controller: manage the views
+  - Model — | Controller| — View
+
+
+
+## Work with View Controllers
+
+- Property list: a structured text file that contains essential configuration information about the app
