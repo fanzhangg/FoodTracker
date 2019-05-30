@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var ratingControl: RatingControl!
     
     // `IBOutlet` attribute: connect to the `nameTextField` property from Interface Builder
     // `weak` keyword: the reference does not prevent the system from deallocating the referenced object; prevent reference cycles
@@ -68,16 +69,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     //MARK: Actions
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        // `sender`: the objects that is responsible to trigger the action
-        // `IBAction`: an action that you can connect to from your storyboard in Interface Builder
-        // `func setDefaultLabelText`: decalre a method
-        
-        // Set the label's `text` property to Default Text
-        // ! swift can infer the type
-        mealNameLabel.text = "Default Text"
-    }
-    
+//    @IBAction func setDefaultLabelText(_ sender: UIButton) {
+//        // `sender`: the objects that is responsible to trigger the action
+//        // `IBAction`: an action that you can connect to from your storyboard in Interface Builder
+//        // `func setDefaultLabelText`: decalre a method
+//
+//        // Set the label's `text` property to Default Text
+//        // ! swift can infer the type
+//        mealNameLabel.text = "Default Text"
+//    }
+
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         // Hide the keyboard
         // If the user taps the image view while typing in the text field, the keyboard is dismissed properly
