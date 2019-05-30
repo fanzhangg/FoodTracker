@@ -52,3 +52,15 @@
 ## Work with View Controllers
 
 - Property list: a structured text file that contains essential configuration information about the app
+
+
+
+## Implement a Custom Control
+
+- Initializing a view:
+  - Programmatically initialize the view: `init(frame:)`
+    - A class automatically inherit all of their super class's designated initializer
+    - ! inherit any superclass initializer if you implement any initializer
+    - Must implement all `required` initializer & mark the initializers as `required` 
+  - Load the view from storyboard: `init?(coder:)`
+
