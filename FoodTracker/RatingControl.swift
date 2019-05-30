@@ -28,8 +28,13 @@ import UIKit
         }
     }
     
-    // Internal access
-    var rating = 0
+    // `var`: allow internal access
+    // `{...}`: call the `updateButtonSelectionStates()` method when the rating changes
+    var rating = 0 {
+        didSet {
+            updateButtonSelectionStates()
+        }
+    }
     
     // MARK: Initialization
     override init(frame: CGRect) {
@@ -45,7 +50,20 @@ import UIKit
     
     // MARK: Button Action
     @objc func ratingButtonTapped(button: UIButton) {
-        print("Button pressed!")
+        guard let index = ratingButtons.firstIndex(of: button) else {
+            fatalError("The button, \(button), is not in the rattingButtons array: \(ratingButtons)")
+        }
+        
+        // Calculate the rating of the selected button
+        let selectedRating = index + 1
+        
+        if selectedRating == rating {
+            // If the selected star represents the current rating, reset the rating to 0
+            rating = 0
+        } else {
+            // Else set the rating to the selected star
+            rating = selectedRating
+        }
     }
     
     
@@ -97,6 +115,16 @@ import UIKit
             
             // Add the new button to the rating button array
             ratingButtons.append(button)
+        }
+        
+        updateButtonSelectionStates()
+    }
+    
+    private func updateButtonSelectionStates() {
+        for (index, button) in ratingButtons.enumerated() {
+            // If the index of a button is less than the rating, that button should be selected, so the `isSelected` property is set to be `true`
+            // Else it is set to be `false`
+            button.isSelected = index < rating
         }
     }
     
