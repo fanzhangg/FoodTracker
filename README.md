@@ -63,4 +63,20 @@
     - ! inherit any superclass initializer if you implement any initializer
     - Must implement all `required` initializer & mark the initializers as `required` 
   - Load the view from storyboard: `init?(coder:)`
+- Private method: 
+  - Only can be called by code within the declaring class
+  - Encapsulate & protect methods, ensure not unexpectedly/accidentally called from the outside
+- Variable: `var`
+- Constant: `let`
 
+
+## Define Your Data Model
+
+- Test:
+  - Functional tests: To check that everything is producing the values you expect
+  - Performance tests: To check that your code is performing as fast as you expect it
+
+- Optionals:
+    - Optionals can be `nil` or have a value
+    - Need to *unwrap* optionals to safely use them
+- `guard` statement: Declare a condition that must be true for the code after the `guard` to be excute
