@@ -92,4 +92,6 @@
   - Display a scrolling list of items
 
   - Managed by a table view controller `UITableViewController`(Subclass of `UIViewController`)
-  - 
+
+- Data source: Supply the table view with the data it needs to display
+- Delegate: Helps the table view manage cell selection, and other aspects
