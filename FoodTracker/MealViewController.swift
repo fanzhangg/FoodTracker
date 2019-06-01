@@ -16,6 +16,12 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    /*
+    This value is either passed by `MealTableViewController` in `prepare(for:sender:)` or constructed as part of adding a new meal
+    */
+    var meal: Meal?
     
     // `IBOutlet` attribute: connect to the `nameTextField` property from Interface Builder
     // `weak` keyword: the reference does not prevent the system from deallocating the referenced object; prevent reference cycles

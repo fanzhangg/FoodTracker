@@ -104,3 +104,5 @@
 - Navigation controller: Manage transitions backward and forward through a series of view controllers
 - Navigation stack: the set of view controllers managed by a particular navigation controller
 - Root view controller: first item added to the stack
+- Modal Segue: Present task that the user must complete before continuing
+
