@@ -11,6 +11,7 @@
   
   - blocks to construct your user interface & present your content in a clear, elegant, and useful way
   - are of type `UIView` / subclass
+  - a rectangular region that can draw its own content and respond to user events
   
 - Constraint:
 
@@ -75,8 +76,20 @@
 - Test:
   - Functional tests: To check that everything is producing the values you expect
   - Performance tests: To check that your code is performing as fast as you expect it
-
 - Optionals:
     - Optionals can be `nil` or have a value
     - Need to *unwrap* optionals to safely use them
-- `guard` statement: Declare a condition that must be true for the code after the `guard` to be excute
+- `guard` statement: Declare a condition that must be true for the code after the `guard` to be execute
+
+
+
+## Create the Meal List
+
+- Scene: Each scene contains views managed by a view controller, & any items added to the controller or its views
+
+- Table view:
+
+  - Display a scrolling list of items
+
+  - Managed by a table view controller `UITableViewController`(Subclass of `UIViewController`)
+  - 
