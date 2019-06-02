@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // `UITextFieldDelegate` protocal allows the `ViewController` class to act as a valid text field delegate
@@ -70,6 +71,26 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         
         // Dismiss the picker
         dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: Navigation
+    // This method lets you configure a view controller before it is presented
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        // Configure the destination view controller only when the save button is pressed
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        // Create constnats from the current text field text, selected image, & rating in the scene
+        // - `??`: nil coalescing operator, return the value of an optional if has a value, or return a default value otherwise
+        let name = nameTextField.text ?? ""
+        let photo = photoImageView.image
+        let rating = ratingControl.rating
+        
+        // Set the meal to be passed to MealTableViewController after the unwind segue
+        meal = Meal(name: name, photo: photo, rating: rating)
     }
     
     //MARK: Actions

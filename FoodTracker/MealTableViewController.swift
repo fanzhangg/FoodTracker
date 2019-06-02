@@ -103,6 +103,20 @@ class MealTableViewController: UITableViewController {
     }
     */
     
+    //MARK: Actions
+    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+        // - `as?`: optional type cast operator, downcast the segue's source view controller to a `MealViewController` instance
+        // If downcast succeeds, assigne the `MealViewController` instance to the local constant `sourceViewController`, & check to see if the meal property on `sourceViewController` is `nil`
+        // If the `meal` property is not `nil`, assign the value of the property to the local constant `meal` & execute the `if` statement
+        if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
+            // Add a new meal.
+            let newIndexPath = IndexPath(row: meals.count, section: 0)
+            meals.append(meal)
+            // Animate the addition of a new row to the table view
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+    }
+    
     //MARK: Private Methods
     private func loadSampleMeals() {
         let photo1 = UIImage(named: "meal1")
