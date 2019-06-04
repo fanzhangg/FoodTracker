@@ -106,3 +106,11 @@
 - Root view controller: first item added to the stack
 - Modal Segue: Present task that the user must complete before continuing
 - Unwind Segue: Move backward through one or more segues to return the user to a scene managed by an existing view controller
+
+
+
+## Implement Edit and Delete Behavior
+
+- Presentation styles:
+  - Present modally: The user must either complete/cancel before continuing
+  - Present: Use a navigation controller when the user is navigation through hierarchical data

@@ -19,7 +19,21 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBAction func Cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), the view controller needs to be dismissed in 2 ways
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        if isPresentingInAddMealMode {
+            // Dismiss the meal detail scene
+            dismiss(animated: true, completion: nil)
+            }
+        // If the user is editing an existing meal
+        // - `if let`: safely unwrap the view controller's `navigationController` property
+        else if let owningNavigationController = navigationController {
+            // Pop the current controller off the navigation stack & animate the transition
+            owningNavigationController.popViewController(animated: true)
+        }
+        else {
+            fatalError("The MealViewController is not inside a navigation controller.")
+        }
     }
     
     
