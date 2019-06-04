@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class MealTableViewController: UITableViewController {
     //MARK: Properties
@@ -93,27 +94,63 @@ class MealTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+            // If the user is adding an item to the meal list, don't need to change the meal detail scene's appearance
+        case "AddItem":
+            os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+        case "ShowDetail":
+            // Sanity check
+            // - Get the destination view controller
+            guard let mealDetailViewController = segue.destination as? MealViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            // - Get the selected meal cell
+            guard let selectedMealCell = sender as? MealTableViewCell else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            // - Get the index path of the selected cell
+            guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedMeal = meals[indexPath.row]
+            mealDetailViewController.meal = selectedMeal
+            
+    default:
+        fatalError("Unexpected Segue Identifier: \(segue.identifier ?? "No identifier")")
+            
+        }
     }
-    */
+ 
     
     //MARK: Actions
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+        
         // - `as?`: optional type cast operator, downcast the segue's source view controller to a `MealViewController` instance
         // If downcast succeeds, assigne the `MealViewController` instance to the local constant `sourceViewController`, & check to see if the meal property on `sourceViewController` is `nil`
         // If the `meal` property is not `nil`, assign the value of the property to the local constant `meal` & execute the `if` statement
         if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
+            // Check whetrher a row in the table view is selected
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing meal
+                meals[selectedIndexPath.row] = meal
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else {
             // Add a new meal.
             let newIndexPath = IndexPath(row: meals.count, section: 0)
             meals.append(meal)
             // Animate the addition of a new row to the table view
             tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
     

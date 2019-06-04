@@ -30,7 +30,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     // `IBOutlet` attribute: connect to the `nameTextField` property from Interface Builder
     // `weak` keyword: the reference does not prevent the system from deallocating the referenced object; prevent reference cycles
-    // *Some parts have strong references to the object (i.e. superview)
+    // * Some parts have strong references to the object (i.e. superview)
     // Implicitly unwrapped optional variable of type `UITextField`
     // `!`: indicate the type is an implicitly unwrapped optional (an optional type having a value after its first set)
     
@@ -42,6 +42,14 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Handle the text field's user input through delegate callbacks
         // - `self` refers to the `ViewController` class
         nameTextField.delegate = self
+        
+        // Set up views if editing an existing Meal
+        if let meal = meal {
+            navigationItem.title = meal.name
+            nameTextField.text   = meal.name
+            photoImageView.image = meal.photo
+            ratingControl.rating = meal.rating
+        }
         
         // Enable the Save button only if the text field has a valid Meal name
         updateSaveButtonState()
