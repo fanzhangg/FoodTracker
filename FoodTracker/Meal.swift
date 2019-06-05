@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import os.log
 
-class Meal {
+class Meal: NSObject, NSCoding {
+    
     // MAKR: properties
     var name: String
     var photo: UIImage?
     var rating: Int
+    // Look up URL for your app's documents directory (save data for the user)
+    // - OK to unwrap the optional since the returned array should only cantain one match
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("meals")
+    
+    //MARK: Types
+    struct PropertyKey {
+        // `static`: the property belong to the structure itself, not the instance of structure
+        // Access by `PropertyKey.name`
+        static let name = "name"
+        static let photo = "photo"
+        static let rating = "rating"
+    }
     
     // MARK: Initialization
     // - `init?`: failabel initializer, return optional value / implicitly unwrapped optional values (a valid value / nil)
@@ -32,5 +47,31 @@ class Meal {
         self.name = name
         self.photo = photo
         self.rating = rating
+    }
+    
+    //MARK: NSCoding
+    // Prepare the class's information to be archived
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: PropertyKey.name)
+        aCoder.encode(photo, forKey: PropertyKey.photo)
+        aCoder.encode(rating, forKey: PropertyKey.rating)
+    }
+    
+    // `convenience`: a secondary initializer
+    // `?`: failable initialzer that might return `nil`
+    required convenience init?(coder aDecoder: NSCoder) {
+        // The name is required. If we cannot decode a name string, the initializer should fail
+        guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String
+            else {
+                os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
+                return nil
+        }
+        
+        // Since photo is an optional property of Meal, use conditional cast to unarchive `photo`
+        let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
+        // Unarchive `rating`
+        let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
+        // Must call designated initializer
+        self.init(name: name, photo: photo, rating: rating)
     }
 }
