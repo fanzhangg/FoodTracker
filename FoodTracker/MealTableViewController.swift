@@ -191,17 +191,31 @@ class MealTableViewController: UITableViewController {
         meals += [meal1, meal2, meal3]
     }
     
+    /// Save meals to the the arhive url
     private func saveMeals() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
-        if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: meals, requiringSecureCoding: false)
+            try data.write(to: Meal.ArchiveURL.absoluteURL)
+            os_log("Meal Saved", log: OSLog.default, type: .debug)
+        } catch {
+            os_log("Unable to save meals", log: OSLog.default, type: .error)
         }
     }
     
+    /// Load meals from the archive url
     private func loadMeals() -> [Meal]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+        do {
+            let data = try Data(contentsOf: Meal.ArchiveURL.absoluteURL)
+            guard let archivedMeals = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Meal] else {
+                os_log("Unable to convert the data to meal array", log: OSLog.default, type: .error)
+                return nil
+            }
+            os_log("Load the meals", log: OSLog.default, type: .debug)
+            return archivedMeals
+        } catch {
+            os_log("Unable to load meals", log: OSLog.default, type: .error)
+            return nil
+        }
     }
 
 }
