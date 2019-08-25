@@ -15,6 +15,7 @@ class Meal: NSObject, NSCoding {
     var name: String
     var photo: UIImage?
     var rating: Int
+    var descript: String
     // Look up URL for your app's documents directory (save data for the user)
     // - OK to unwrap the optional since the returned array should only cantain one match
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -27,12 +28,13 @@ class Meal: NSObject, NSCoding {
         static let name = "name"
         static let photo = "photo"
         static let rating = "rating"
+        static let descript = "descript"
     }
     
     // MARK: Initialization
     // - `init?`: failabel initializer, return optional value / implicitly unwrapped optional values (a valid value / nil)
     // - The initializer returns an optional `Meal?` object
-    init?(name: String, photo: UIImage?, rating: Int) {
+    init?(name: String, photo: UIImage?, rating: Int, descript: String) {
         // The name must not be empty
         guard !name.isEmpty else {
             return nil
@@ -47,6 +49,7 @@ class Meal: NSObject, NSCoding {
         self.name = name
         self.photo = photo
         self.rating = rating
+        self.descript = descript
     }
     
     //MARK: NSCoding
@@ -55,6 +58,7 @@ class Meal: NSObject, NSCoding {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(rating, forKey: PropertyKey.rating)
+        aCoder.encode(descript, forKey: PropertyKey.descript)
     }
     
     // `convenience`: a secondary initializer
@@ -63,7 +67,7 @@ class Meal: NSObject, NSCoding {
         // The name is required. If we cannot decode a name string, the initializer should fail
         guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String
             else {
-                os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
+                os_log("Unable to decode the name for a Meal object", log: OSLog.default, type: .debug)
                 return nil
         }
         
@@ -71,7 +75,12 @@ class Meal: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         // Unarchive `rating`
         let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
+        // Unarchive `descript``
+        guard let descript = aDecoder.decodeObject(forKey: PropertyKey.descript) as? String else {
+            os_log("Unable to decode the descript for a Meal object", log: OSLog.default, type: .debug)
+            return nil
+        }
         // Must call designated initializer
-        self.init(name: name, photo: photo, rating: rating)
+        self.init(name: name, photo: photo, rating: rating, descript: descript)
     }
 }

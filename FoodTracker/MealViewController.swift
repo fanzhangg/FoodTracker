@@ -18,6 +18,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var descriptTextField: UITextField!
     @IBAction func Cancel(_ sender: UIBarButtonItem) {
         // Depending on style of presentation (modal or push presentation), the view controller needs to be dismissed in 2 ways
         let isPresentingInAddMealMode = presentingViewController is UINavigationController

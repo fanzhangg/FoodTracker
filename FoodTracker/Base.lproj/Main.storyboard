@@ -76,20 +76,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HNW-nc-ggt">
-                                <rect key="frame" x="16" y="84" width="343" height="406"/>
+                            <stackView opaque="NO" contentMode="top" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HNW-nc-ggt">
+                                <rect key="frame" x="16" y="84" width="343" height="444"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Llm-Gz-ltD">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="qHN-fu-YmI"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="cnl-uB-9zV">
-                                        <rect key="frame" x="11.5" y="38" width="320" height="320"/>
+                                        <rect key="frame" x="0.0" y="38" width="343" height="320"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="cnl-uB-9zV" secondAttribute="height" multiplier="1:1" id="kbO-ou-muc"/>
+                                            <constraint firstAttribute="height" constant="320" id="gvL-Jf-r6I"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="HtV-S8-fNE" appends="YES" id="EF8-V1-sBZ"/>
@@ -106,17 +109,28 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="78a-k2-eGt">
+                                        <rect key="frame" x="0.0" y="414" width="343" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5CW-BH-tys"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Llm-Gz-ltD" secondAttribute="trailing" id="RAB-1F-E4Q"/>
+                                    <constraint firstItem="Llm-Gz-ltD" firstAttribute="leading" secondItem="cnl-uB-9zV" secondAttribute="leading" id="HHj-cJ-Sfs"/>
+                                    <constraint firstItem="Llm-Gz-ltD" firstAttribute="leading" secondItem="HNW-nc-ggt" secondAttribute="leading" id="MDQ-Tl-ux7"/>
+                                    <constraint firstItem="cnl-uB-9zV" firstAttribute="leading" secondItem="78a-k2-eGt" secondAttribute="leading" id="W91-xQ-ciO"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HNW-nc-ggt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="UGi-Nx-YXW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HNW-nc-ggt" secondAttribute="trailing" id="WSE-op-cp5"/>
-                            <constraint firstItem="HNW-nc-ggt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="wES-4p-cCH"/>
+                            <constraint firstItem="HNW-nc-ggt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1vR-ig-pvp"/>
+                            <constraint firstItem="HNW-nc-ggt" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8DI-Zw-oft"/>
+                            <constraint firstItem="HNW-nc-ggt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="DNX-X7-YnI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -133,6 +147,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptTextField" destination="78a-k2-eGt" id="NGf-02-Jdb"/>
                         <outlet property="nameTextField" destination="Llm-Gz-ltD" id="Ol5-u7-OO5"/>
                         <outlet property="photoImageView" destination="cnl-uB-9zV" id="V0Z-4r-FHa"/>
                         <outlet property="ratingControl" destination="HV1-Mw-qht" id="ux6-jT-BMM"/>
